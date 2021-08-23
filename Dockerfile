@@ -18,4 +18,4 @@ RUN npm install
 
 COPY app/index.js .
 
-CMD node /github/workspace/index.js
+CMD node /github-action-read-version/index.js
