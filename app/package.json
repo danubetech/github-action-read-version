@@ -1,0 +1,27 @@
+{
+  "name": "github-action-read-version",
+  "version": "1.0.0",
+  "description": "Github action to read configuration file and set version as env variable",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danubetech/github-action-read-version.git"
+  },
+  "keywords": [
+    "CI",
+    "Action",
+    "Workflow"
+  ],
+  "author": "Bernhard Fuchs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danubetech/github-action-read-version/issues"
+  },
+  "homepage": "https://github.com/danubetech/github-action-read-version#readme",
+  "dependencies": {
+    "xml2js": "^0.4.23"
+  }
+}

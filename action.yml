@@ -1,0 +1,5 @@
+name: 'github-action-read-version'
+description: 'Github action to read configuration file and set version as env variable'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
