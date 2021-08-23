@@ -6,6 +6,7 @@ const examplePom = '<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instanc
     '\t<artifactId>uni-resolver-web</artifactId>\n' +
     '\t<packaging>war</packaging>\n' +
     '\t<name>uni-resolver-web</name>\n' +
+    '\t<version>0.4.0</version>\n' +
     '\n' +
     '\t<parent>\n' +
     '\t\t<groupId>decentralized-identity</groupId>\n' +
@@ -14,4 +15,8 @@ const examplePom = '<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instanc
     '\t</parent>\n' +
     '</project>';
 
-const xml2js = require('xml2js');
+const parseString = require('xml2js').parseString;
+
+parseString(examplePom, (err, result) => {
+    console.log(result.project.version[0])
+})

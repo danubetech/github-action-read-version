@@ -18,4 +18,4 @@ RUN npm install
 
 COPY app/index.js .
 
-CMD node app/index.js
+CMD node index.js
