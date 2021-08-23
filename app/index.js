@@ -9,6 +9,7 @@ parseString(pom, (err, result) => {
         throw err;
     }
     const version = result.project.version[0];
-    console.log('Setting version as GLOBAL_TAG: ', version);
+    console.log(`Setting version ${version} as GLOBAL_TAG`);
     process.env.GLOBAL_TAG = version;
+    console.log('process envs', process.env)
 })
