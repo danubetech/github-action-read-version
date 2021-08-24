@@ -3,13 +3,13 @@ const fs = require("fs")
 const pom = fs.readFileSync('/github/workspace/pom.xml')
 
 const parseString = require('xml2js').parseString;
+const core = require('@actions/core');
 
 parseString(pom, (err, result) => {
     if (err) {
         throw err;
     }
     const version = result.project.version[0];
-    console.log(`Setting version ${version} as GLOBAL_TAG`);
-    process.env.GLOBAL_TAG = version;
-    console.log('process envs', process.env)
+    console.log(`Setting version ${version} as output`);
+    core.setOutput('version', version)
 })
