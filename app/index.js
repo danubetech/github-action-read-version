@@ -3,18 +3,19 @@ const readVersionMaven = () => {
     const pom = fs.readFileSync('/github/workspace/pom.xml')
     const parseString = require('xml2js').parseString;
 
-    return parseString(pom, (err, result) => {
+    let parsedPom = '';
+    parseString(pom, (err, result) => {
         if (err) {
             throw err;
         }
-        const version = result.project.version[0];
-
-        if (version === '') {
-            throw new Error('Version is empty');
-        }
-
-        return version;
+        parsedPom = result;
     })
+
+    const version = parsedPom.project.version[0];
+    if (version === '') {
+        throw new Error('Version is empty');
+    }
+    return version;
 }
 
 const core = require('@actions/core');
