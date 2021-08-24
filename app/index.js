@@ -1,21 +1,38 @@
-const fs = require("fs")
+const readVersionMaven = () => {
+    const fs = require("fs")
+    const pom = fs.readFileSync('/github/workspace/pom.xml')
+    const parseString = require('xml2js').parseString;
 
-const pom = fs.readFileSync('/github/workspace/pom.xml')
+    return parseString(pom, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        const version = result.project.version[0];
 
-const parseString = require('xml2js').parseString;
+        if (version === '') {
+            throw new Error('Version is empty');
+        }
+
+        return version;
+    })
+}
+
 const core = require('@actions/core');
+const framework = core.getInput('framework', { trimWhitespace: true, required: true });
 
-parseString(pom, (err, result) => {
-    if (err) {
-        throw err;
-    }
-    const version = result.project.version[0];
+let version = ''
+switch (framework) {
+    case 'maven':
+        version = readVersionMaven();
+        break;
+    case 'node':
+    case 'nodejs':
+        const packageJson = require('/github/workspace/package.json');
+        version = packageJson.version;
+        break;
+    default:
+        throw Error(`Framework ${framework} not supported`)
+}
 
-    if (version === '') {
-        throw new Error('Version is empty');
-    }
-
-    console.log(`Setting version ${version} as output`);
-    core.setOutput('version', version)
-    core.exportVariable('envVersion', version);
-})
+console.log(`Setting version ${version} as output`);
+core.setOutput('version', version)

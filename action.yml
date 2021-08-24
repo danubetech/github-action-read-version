@@ -1,5 +1,9 @@
 name: 'github-action-read-version'
 description: 'Github action to read configuration file and set version as env variable'
+inputs:
+  framework:
+    description: 'Framework used for configuration e.g. maven, nodejs'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
