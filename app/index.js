@@ -17,4 +17,5 @@ parseString(pom, (err, result) => {
 
     console.log(`Setting version ${version} as output`);
     core.setOutput('version', version)
+    core.exportVariable('envVersion', version);
 })
