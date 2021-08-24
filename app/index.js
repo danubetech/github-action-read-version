@@ -10,6 +10,11 @@ parseString(pom, (err, result) => {
         throw err;
     }
     const version = result.project.version[0];
+
+    if (version === '') {
+        throw new Error('Version is empty');
+    }
+
     console.log(`Setting version ${version} as output`);
     core.setOutput('version', version)
 })
