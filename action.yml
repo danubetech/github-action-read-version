@@ -4,6 +4,9 @@ inputs:
   framework:
     description: 'Framework used for configuration e.g. maven, nodejs'
     required: true
+  version-core:
+    description: 'Type of release, can be Major, Minor or Patch'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

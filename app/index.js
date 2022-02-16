@@ -1,4 +1,32 @@
-const readVersionMaven = () => {
+const incrementMajorVersion = (parsedVersion) => {
+    const splitString = parsedVersion.split('.');
+    const majorVersion = parseInt(splitString[0]) + 1;
+    return `${majorVersion}.0.0`;
+}
+
+const incrementMinorVersion = (parsedVersion) => {
+    const splitString = parsedVersion.split('.');
+    const majorVersion = splitString[0];
+    const minorVersion = splitString[1].split('-')[0];
+    return `${majorVersion}.${minorVersion}.0`;
+}
+
+const incrementPatchVersion = (parsedVersion) => {
+    const splitString = parsedVersion.split('.');
+    const majorVersion = splitString[0];
+    const minorVersion = splitString[1].split('-')[0];
+
+    let patchVersion;
+    if (splitString.length === 2) {
+        patchVersion = 1;
+    } else {
+        patchVersion = splitString[2].split('-')[0];
+    }
+
+    return `${majorVersion}.${minorVersion}.${patchVersion}`;
+}
+
+const readVersionMaven = (versionCore) => {
     const fs = require("fs")
     const pom = fs.readFileSync('/github/workspace/pom.xml')
     const parseString = require('xml2js').parseString;
@@ -11,20 +39,29 @@ const readVersionMaven = () => {
         parsedPom = result;
     })
 
-    const version = parsedPom.project.version[0];
-    if (version === '') {
-        throw new Error('Version is empty');
+    const parsedVersion = parsedPom.project.version[0];
+    if (parsedVersion === '') {
+        throw new Error('Parsed Version is empty');
     }
-    return version;
+
+    switch (versionCore) {
+        case 'major':
+            return incrementMajorVersion(parsedVersion);
+        case 'minor':
+            return incrementMinorVersion(parsedVersion);
+        case 'patch':
+            return incrementPatchVersion(parsedVersion);
+    }
 }
 
 const core = require('@actions/core');
 const framework = core.getInput('framework', { trimWhitespace: true, required: true });
+const versionCore = core.getInput('version-core', { trimWhitespace: true, required: true });
 
 let version = ''
 switch (framework) {
     case 'maven':
-        version = readVersionMaven();
+        version = readVersionMaven(versionCore);
         break;
     case 'node':
     case 'nodejs':
