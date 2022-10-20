@@ -2,9 +2,10 @@
   "name": "github-action-read-version",
   "version": "1.0.0",
   "description": "Github action to read configuration file and set version as env variable",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src/main.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "dependencies": {
     "@actions/core": "^1.5.0",
     "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.4"
   }
 }

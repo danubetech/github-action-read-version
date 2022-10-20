@@ -16,6 +16,7 @@ WORKDIR /github-action-read-version/
 COPY app/package.json .
 RUN npm install
 
-COPY app/index.js .
+COPY app/src .
+RUN npm build
 
-CMD node /github-action-read-version/index.js
+CMD node ./dist/index.js
