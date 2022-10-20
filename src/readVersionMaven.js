@@ -75,4 +75,4 @@ const readVersionMaven = (versionCore) => {
     }
 }
 
-module.exports = readVersionMaven;
+exports.readVersionMaven = readVersionMaven;
