@@ -16,7 +16,7 @@ WORKDIR /github-action-read-version/
 COPY package.json .
 RUN npm install
 
-COPY src .
+COPY src/. src/.
 RUN npm run build
 
 CMD node /github-action-read-version/dist/index.js
