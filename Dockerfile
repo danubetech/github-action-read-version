@@ -17,6 +17,6 @@ COPY package.json .
 RUN npm install
 
 COPY src .
-RUN npm build
+RUN npm run build
 
-CMD node ./dist/index.js
+CMD node /github-action-read-version/dist/index.js
