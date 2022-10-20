@@ -50,4 +50,4 @@ const readVersionNode = (parsedVersion, versionCore) => {
     }
 }
 
-exports.readVersionNode = readVersionNode;
+module.exports = readVersionNode;
