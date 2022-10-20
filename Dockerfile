@@ -13,10 +13,10 @@ RUN apk update && apk upgrade && \
 
 WORKDIR /github-action-read-version/
 
-COPY app/package.json .
+COPY package.json .
 RUN npm install
 
-COPY app/src .
+COPY src .
 RUN npm build
 
 CMD node ./dist/index.js
