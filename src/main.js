@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const fs = require('fs');
 const { readVersionMaven } = require("./readVersionMaven");
 const { readVersionNode } = require("./readVersionNode");
 

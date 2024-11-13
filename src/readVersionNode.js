@@ -3,7 +3,7 @@ const incrementMajorVersion = (parsedVersion) => {
     const majorVersion = parseInt(splitString[0]);
 
     const releaseVersion = `${majorVersion + 1}.0.0`
-    const devVersion = `${majorVersion + 1}.1.0`
+    const devVersion = null
 
     return { releaseVersion, devVersion }
 }
@@ -13,8 +13,8 @@ const incrementMinorVersion = (parsedVersion) => {
     const majorVersion = splitString[0];
     const minorVersion = parseInt(splitString[1]);
 
-    const releaseVersion = `${majorVersion}.${minorVersion}.0`
-    const devVersion = `${majorVersion}.${minorVersion + 1}.0`
+    const releaseVersion = `${majorVersion}.${minorVersion + 1}.0`
+    const devVersion = null
 
     return { releaseVersion, devVersion }
 }
@@ -28,11 +28,8 @@ const incrementPatchVersion = (parsedVersion) => {
     let releaseVersion;
     let devVersion;
     if (patchVersion === 0) {
-        releaseVersion = `${majorVersion}.${minorVersion - 1}.${patchVersion + 1}`;
-        devVersion = `${majorVersion}.${minorVersion - 1}.${patchVersion + 2}`;
-    } else {
-        releaseVersion = `${majorVersion}.${minorVersion}.${patchVersion}`;
-        devVersion = `${majorVersion}.${minorVersion}.${patchVersion + 1}`;
+        releaseVersion = `${majorVersion}.${minorVersion}.${patchVersion + 1}`;
+        devVersion = null;
     }
 
     return { releaseVersion, devVersion }
